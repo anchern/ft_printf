@@ -6,7 +6,7 @@
 /*   By: achernys <achernys@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/17 15:45:53 by achernys          #+#    #+#             */
-/*   Updated: 2018/04/28 17:42:05 by achernys         ###   ########.fr       */
+/*   Updated: 2018/04/28 17:56:13 by achernys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ char		*procs(int identifier, t_data *data, t_argptrsave *structarg)
 	char	*src;
 	wchar_t *wstr;
 
-	if ((identifier == 'S' || data->l == 1) && MB_CUR_MAX > 1)
+	if ((identifier == 'S' || data->l == 1))
 	{
 		wstr = get_wstr(&structarg->argptrcurr);
 		src = procwstr(wstr);
