@@ -68,7 +68,9 @@ static size_t	parse_arg(const char *str, t_argptrsave *structarg)
 	addi = 1;
 	processingflags(str, structarg, &addi, data);
 	if (str[addi] == 'n')
+	{
 		procn(structarg->len, structarg, data);
+	}
 	else if (str[addi] != 0)
 	{
 		argstr = getargstr(str[addi], data, structarg);
@@ -83,8 +85,8 @@ static size_t	parse_arg(const char *str, t_argptrsave *structarg)
 				 &&	data->precision != 0)
 			structarg->len += write(1, "0", 1);
 		ft_memdel((void **)&argstr);
-		addi++;
 	}
+	addi++;
 	ft_memdel((void **)&data);
 	return (addi);
 }
