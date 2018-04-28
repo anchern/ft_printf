@@ -6,11 +6,12 @@
 /*   By: achernys <achernys@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/17 15:45:53 by achernys          #+#    #+#             */
-/*   Updated: 2018/04/28 17:03:46 by achernys         ###   ########.fr       */
+/*   Updated: 2018/04/28 17:42:05 by achernys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
 static char		*getstrcpy(char *str)
 {
 	char *strout;
@@ -25,7 +26,7 @@ char		*procc(int identifier, t_data *data, t_argptrsave *structarg)
 {
 	char	*strch;
 
-	if (identifier == 'C' || data->l == 1)
+	if ((identifier == 'C' || data->l == 1) && MB_CUR_MAX > 1)
 		return (procwc(get_wchar(&structarg->argptrcurr)));
 	strch = (char *)ft_memalloc(2);
 	strch[0] = get_char(&structarg->argptrcurr);
@@ -71,7 +72,7 @@ char		*procs(int identifier, t_data *data, t_argptrsave *structarg)
 	char	*src;
 	wchar_t *wstr;
 
-	if (identifier == 'S' || data->l == 1)
+	if ((identifier == 'S' || data->l == 1) && MB_CUR_MAX > 1)
 	{
 		wstr = get_wstr(&structarg->argptrcurr);
 		src = procwstr(wstr);
@@ -83,7 +84,7 @@ char		*procs(int identifier, t_data *data, t_argptrsave *structarg)
 	if (data->precision > -1)
 	{
 		outstr = ft_strnew((size_t)data->precision);
-		if (identifier == 'S' || data->l == 1)
+		if ((identifier == 'S' || data->l == 1) && MB_CUR_MAX > 1)
 			wprecision(outstr, src, data->precision, wstr);
 		else
 			ft_memcpy(outstr, src, (size_t)data->precision);
