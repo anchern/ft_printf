@@ -6,7 +6,7 @@
 /*   By: achernys <achernys@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/01 14:55:00 by achernys          #+#    #+#             */
-/*   Updated: 2018/05/01 16:57:03 by achernys         ###   ########.fr       */
+/*   Updated: 2018/05/01 19:54:34 by achernys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,28 +15,32 @@
 
 static __int128	getfract(t_data * data, long double num)
 {
-	int end;
-	int i;
+	int 		end;
+	int 		i;
+	__int128	tmpint;
 
 	i = 0;
 	end = data->precision == -1 ? 6 : data->precision;
-	while (i < end && i < 48)
+	while (i < end && i < MAXNUM)
 	{
 		num *=10;
 		i += 1;
 	}
-	return ((__int128)round(num));
+	tmpint = (__int128)num;
+	num -= (long double) tmpint;
+	if (num >= 0.5)
+		tmpint++;
+	return ((__int128)tmpint);
 }
 
-char	*get_fractpart(t_data * data, long double num)
+char	*get_fractpart(t_data * data, long double num, int *flag)
 {
-	__int128_t			intpart;
-	long double			fractpart;
-	char				*outstr;
-	char				*tmp;
+	__int128_t		intpart;
+	long double		fractpart;
+	char			*outstr;
+	char			*tmp;
 
-	intpart = (__int128_t)num;
-	fractpart = num - (long double)intpart;
+	fractpart = num;
 	if (data->precision == 0)
 		return("");
 	outstr = ft_strnew((size_t)(data->precision == -1 ? 7 : data->precision + 1));
@@ -44,8 +48,15 @@ char	*get_fractpart(t_data * data, long double num)
 	outstr[0] = '.';
 	if ((intpart = getfract(data, fractpart)) != 0)
 	{
+
 		tmp = ft_bitoa(intpart);
-		ft_strcpy(&outstr[1], tmp);
+		if (ft_strlen(tmp) > ft_strlen(&outstr[1]))
+		{
+			*flag = 1;
+			ft_memdel((void **) &tmp);
+			return (outstr);
+		}
+		ft_memcpy((void *)(&outstr[1]), (void *)tmp, MAXNUM);
 		ft_memdel((void **) &tmp);
 	}
 	return (outstr);
@@ -72,7 +83,9 @@ char	*procf(char identifier, t_data *data, t_argptrsave *structarg)
 	char		*res;
 	int			lennum;
 	char		*tmpintpart;
+	__int128	tmpint;
 	long double	tmpnum;
+	int			flag;
 
 	if (data->L > 0)
 		num = get_ldouble(&structarg->argptrcurr);
@@ -105,9 +118,17 @@ char	*procf(char identifier, t_data *data, t_argptrsave *structarg)
 		ft_memdel((void **)&tmpintpart);
 		return (res);
 	}
-	intpart = ft_bitoa((__int128)(data->precision == 0 ? round(num) : num));
-	fractpart = get_fractpart(data, ABS(num));
+	flag = 0;
+	tmpint = (__int128)num;
+	num -= (long double) tmpint;
+	if ( data->precision == 0 && num >= 0.5)
+		tmpint++;
+	fractpart = get_fractpart(data, ABS(num), &flag);
+	if (flag == 1)
+		tmpint++;
+	intpart = ft_bitoa(tmpint);
 	res = ft_strjoin(intpart, fractpart);
 	ft_memdel((void **)&intpart);
+	ft_memdel((void **)&fractpart);
 	return (res);
 }

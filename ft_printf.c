@@ -6,7 +6,7 @@
 /*   By: achernys <achernys@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/28 15:23:08 by achernys          #+#    #+#             */
-/*   Updated: 2018/04/28 18:26:19 by achernys         ###   ########.fr       */
+/*   Updated: 2018/05/01 17:12:17 by achernys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ static size_t	parse_arg(const char *str, t_argptrsave *structarg)
 			structarg->len += write(1, "0", 1);
 		ft_memdel((void **)&argstr);
 	}
-	addi++;
+	addi = str[addi] == 0 ? addi + 0 : addi + 1;
 	ft_memdel((void **)&data);
 	return (addi);
 }
