@@ -12,7 +12,7 @@
 
 #include "ft_printf.h"
 
-static char	*isneedtoadd(char *argstr, t_data *data, char identifier)
+char	*isneedtoadd(char *argstr, t_data *data, char identifier)
 {
 	char	*outstr;
 

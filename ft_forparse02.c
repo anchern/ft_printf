@@ -72,3 +72,24 @@ int			printnullstr(t_data *data, char identifier)
 	}
 	return (addlen);
 }
+
+char	*procdouble(char identifier, t_data *data, t_argptrsave *structarg)
+{
+	char	*argstr;
+	char	*outstr;
+
+	if (identifier == 'f' || identifier == 'F')
+	{
+		argstr = procf(identifier, data, structarg);
+		outstr = isneedtoadd(argstr, data, identifier);
+		return (outstr == 0 ? argstr : outstr);
+	}
+//	else if (identifier == 'e' || identifier == 'E')
+//		return (proce(identifier, data, structarg));
+//	else if (identifier == 'g' || identifier == 'G')
+//		return (procg(identifier, data, structarg));
+//	else if (identifier == 'a' || identifier == 'A')
+//		return (proca(identifier, data, structarg));
+	else
+		return (0);
+}

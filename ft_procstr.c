@@ -6,7 +6,7 @@
 /*   By: achernys <achernys@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/17 15:45:53 by achernys          #+#    #+#             */
-/*   Updated: 2018/04/28 17:56:13 by achernys         ###   ########.fr       */
+/*   Updated: 2018/04/28 18:24:13 by achernys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ char		*procs(int identifier, t_data *data, t_argptrsave *structarg)
 	if (data->precision > -1)
 	{
 		outstr = ft_strnew((size_t)data->precision);
-		if ((identifier == 'S' || data->l == 1) && MB_CUR_MAX > 1)
+		if (identifier == 'S' || data->l == 1)
 			wprecision(outstr, src, data->precision, wstr);
 		else
 			ft_memcpy(outstr, src, (size_t)data->precision);

@@ -39,7 +39,8 @@ SRC = ft_printf.c libft/ft_atoi.c\
 		ft_getparam.c ft_getint.c ft_get_tval.c ft_realloc.c\
 		ft_forparse.c ft_processingflags.c ft_parsetype.c ft_procint.c ft_proctxt.c\
 		ft_procfloat.c ft_gettxtval.c ft_bitoa.c ft_forparse01.c ft_procstr.c\
-		ft_itoabase.c ft_procnotation.c ft_getunsignedval.c ft_other.c ft_forparse02.c
+		ft_itoabase.c ft_procnotation.c ft_getunsignedval.c ft_other.c ft_forparse02.c\
+		ft_getfloatval.c ft_procdouble.c
 
 OFILES = $(SRC:.c=.o)
 

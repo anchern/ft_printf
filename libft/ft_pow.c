@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_pow.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: achernys <achernys@student.42.fr>          +#+  +:+       +#+        */
+/*   By: achernys <achernys@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/04 14:12:07 by anonymous         #+#    #+#             */
-/*   Updated: 2017/11/11 07:57:16 by achernys         ###   ########.fr       */
+/*   Updated: 2018/05/01 16:24:03 by achernys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-long	ft_pow(int num, int pow)
+__int128	ft_pow(__int128 num, int pow)
 {
 	if (pow < 0)
 		return (0);

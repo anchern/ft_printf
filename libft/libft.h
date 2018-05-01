@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: achernys <achernys@student.42.fr>          +#+  +:+       +#+        */
+/*   By: achernys <achernys@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/27 17:29:54 by achernys          #+#    #+#             */
-/*   Updated: 2017/11/15 16:13:13 by achernys         ###   ########.fr       */
+/*   Updated: 2018/05/01 16:24:03 by achernys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void				*ft_memcpy(void *dst, const void *src, size_t n);
 void				ft_memdel(void **ap);
 void				*ft_memmove(void *dst, const void *src, size_t n);
 void				*ft_memset(void *b, int c, size_t len);
-long				ft_pow(int num, int pow);
+__int128			ft_pow(__int128 num, int pow);
 void				ft_putchar(char c);
 void				ft_putchar_fd(char c, int fd);
 void				ft_putendl(char const *s);

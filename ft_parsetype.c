@@ -70,5 +70,7 @@ char		*getargstr(char identifier, t_data *data, t_argptrsave *structarg)
 		return (procdig(identifier, data, structarg));
 	if (ft_strchr("cCsS", identifier))
 		return (proctext(identifier, data, structarg));
+	if (ft_strchr("fFaAeEgG", identifier))
+		return (procdouble(identifier, data, structarg));
 	return (addspace(0, data, identifier));
 }

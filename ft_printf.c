@@ -6,7 +6,7 @@
 /*   By: achernys <achernys@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/28 15:23:08 by achernys          #+#    #+#             */
-/*   Updated: 2018/04/26 19:25:37 by achernys         ###   ########.fr       */
+/*   Updated: 2018/04/28 18:26:19 by achernys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,7 @@ static size_t	parse_arg(const char *str, t_argptrsave *structarg)
 	addi = 1;
 	processingflags(str, structarg, &addi, data);
 	if (str[addi] == 'n')
-	{
 		procn(structarg->len, structarg, data);
-	}
 	else if (str[addi] != 0)
 	{
 		argstr = getargstr(str[addi], data, structarg);

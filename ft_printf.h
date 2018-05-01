@@ -6,7 +6,7 @@
 /*   By: achernys <achernys@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/28 18:12:38 by achernys          #+#    #+#             */
-/*   Updated: 2018/04/26 17:18:42 by achernys         ###   ########.fr       */
+/*   Updated: 2018/05/01 14:59:27 by achernys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 # include "libft/libft.h"
 # include <stdarg.h>
+# include <math.h>
+# define ABS(x) x < 0 ? -x : x
 
 typedef struct 		s_argptrsave
 {
@@ -104,6 +106,13 @@ char				*procc(int identifier, t_data *data, t_argptrsave *structarg);
 char				*procwc(wchar_t wchar);
 char				*procwstr(wchar_t *wstr);
 int					printnullstr(t_data *data, char identifier);
+
+char				*isneedtoadd(char *argstr, t_data *data, char identifier);
+
+double				get_double(va_list *argptr);
+long double			get_ldouble(va_list *argptr);
+char				*procf(char identifier, t_data *data, t_argptrsave *structarg);
+char				*procdouble(char identifier, t_data *data, t_argptrsave *structarg);
 
 void				closearglst(t_argptrsave *structarg);
 #endif
