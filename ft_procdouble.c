@@ -62,6 +62,8 @@ char			*procf(char identifier, t_data *data, t_argptrsave *structarg)
 		num = get_ldouble(&structarg->argptrcurr);
 	else
 		num = get_double(&structarg->argptrcurr);
+	if (isnan(num) || isinf(num))
+		data->zero = 0;
 	if (isnan(num))
 		return (ft_strdup(identifier == 'F' ? "NAN" : "nan"));
 	if (isinf(num))

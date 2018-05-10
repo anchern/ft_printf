@@ -6,7 +6,7 @@
 /*   By: achernys <achernys@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/10 13:31:49 by achernys          #+#    #+#             */
-/*   Updated: 2018/05/10 20:27:11 by achernys         ###   ########.fr       */
+/*   Updated: 2018/05/10 20:54:14 by achernys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ static void	takeeformatnum(long double *num, int *power)
 	int			intpart;
 	long double	tmpnum;
 
+	*power = 0;
 	flag = fabsl(*num) < 1.0 ? 0 : 1;
 	while ((fabsl(*num) >= 9.999999999999 || fabsl(*num) < 1.0) && *num != 0.0)
 	{
@@ -68,11 +69,12 @@ char		*transformftoue(char identifier, t_data *data,
 		num = get_ldouble(&structarg->argptrcurr);
 	else
 		num = get_double(&structarg->argptrcurr);
+	if (isnan(num) || isinf(num))
+		data->zero = 0;
 	if (isnan(num))
-		return (ft_strdup(identifier == 'F' ? "NAN" : "nan"));
+		return (ft_strdup(identifier == 'E' ? "NAN" : "nan"));
 	if (isinf(num))
-		return (ft_strdup(identifier == 'F' ? "INF" : "inf"));
-	power = 0;
+		return (ft_strdup(identifier == 'E' ? "INF" : "inf"));
 	minus = 0;
 	if (fabsl(num) < 1.0 && num != 0.0)
 		minus = 1;
