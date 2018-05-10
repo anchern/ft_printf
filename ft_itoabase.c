@@ -6,19 +6,19 @@
 /*   By: achernys <achernys@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/17 19:23:30 by achernys          #+#    #+#             */
-/*   Updated: 2018/04/26 17:26:42 by achernys         ###   ########.fr       */
+/*   Updated: 2018/05/08 16:08:35 by achernys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include <stdio.h>
 
-static int	getlenstr(unsigned __int128 number, int base)
+static int	getlenstr(__uint128_t number, int base)
 {
 	int len;
 
 	len = 1;
-	while (number >= (unsigned __int128)base)
+	while (number >= (__uint128_t)base)
 	{
 		number /= base;
 		len++;
@@ -26,11 +26,11 @@ static int	getlenstr(unsigned __int128 number, int base)
 	return (len);
 }
 
-static void	getres(char *str, unsigned __int128 number, int base, char sym)
+static void	getres(char *str, __uint128_t number, int base, char sym)
 {
-	unsigned __int128		res;
+	__uint128_t		res;
 
-	if (number < (unsigned __int128)base)
+	if (number < (__uint128_t)base)
 	{
 		*str = (char)(number > 9 ? number - 10 + sym : number + '0');
 		return ;
@@ -38,10 +38,9 @@ static void	getres(char *str, unsigned __int128 number, int base, char sym)
 	getres(str - 1, number / base, base, sym);
 	res = number % base;
 	*str = (char)(res > 9 ? res - 10 + sym : res + '0');
-
 }
 
-char		*ft_itoabase(unsigned __int128 number, int base, char sym)
+char		*ft_itoabase(__uint128_t number, int base, char sym)
 {
 	int		len;
 	char	*outstr;

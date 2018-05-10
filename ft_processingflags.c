@@ -27,7 +27,7 @@ static int		isnonwidth(char format, t_data *data,
 			data->pstar = 0;
 			data->dollar = 0;
 		}
-		data->precision = atoires < 0 ? -1 : atoires;
+		data->prec = atoires < 0 ? -1 : atoires;
 		return (1);
 	}
 	if (format == '$')
@@ -110,7 +110,7 @@ static void		procexpansion(const char *format, size_t *addi, t_data *data)
 	}
 	else if (format[*addi] == 'L')
 	{
-		data->L = (char)(data->L == 2 || data->L == 0 ? 1 : 2);
+		data->bl = (char)(data->bl == 2 || data->bl == 0 ? 1 : 2);
 		*addi += 1;
 	}
 }
@@ -129,9 +129,9 @@ void			processingflags(const char *format, t_argptrsave *structarg,
 		if (isnonzerodigit(format[*addi]) || format[*addi] == '.' ||
 			format[*addi] == '*')
 			processingdigit(format, structarg, addi, data);
-		if (ft_strchr("#0-+ ", format[*addi]))
+		else if (ft_strchr("#0-+ ", format[*addi]))
 			procindentation(format[*addi], addi, data);
-		if (ft_strchr(expansion, format[*addi]))
+		else if (ft_strchr(expansion, format[*addi]))
 			procexpansion(format, addi, data);
 	}
 	if ((data->pstar || data->wstar) && format[*addi] != 0)

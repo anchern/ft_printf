@@ -6,7 +6,7 @@
 /*   By: achernys <achernys@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/26 16:13:57 by achernys          #+#    #+#             */
-/*   Updated: 2018/04/26 17:18:42 by achernys         ###   ########.fr       */
+/*   Updated: 2018/05/08 17:07:36 by achernys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 static int	printspace(t_data *data, int len)
 {
-	int i;
-	int addlen;
+	int		i;
+	int		addlen;
 
 	i = (int)data->width - len;
 	addlen = 0;
@@ -30,28 +30,28 @@ static int	printspace(t_data *data, int len)
 
 static int	procstrnull(t_data *data)
 {
-	int addlen;
+	int		addlen;
 
 	if (data->minus)
 	{
-		addlen = (int)write(1, "(null)", (size_t)(data->precision > -1  &&
-				data->precision < 6 ? data->precision : 6));
-		addlen += printspace(data, data->precision > -1  &&
-				data->precision < 6 ? data->precision + 1 : 7);
+		addlen = (int)write(1, "(null)", (size_t)(data->prec > -1 &&
+					data->prec < 6 ? data->prec : 6));
+		addlen += printspace(data, data->prec > -1 &&
+				data->prec < 6 ? data->prec + 1 : 7);
 	}
 	else
 	{
-		addlen = printspace(data, data->precision > -1  &&
-				data->precision < 6 ? data->precision + 1 : 7);
-		addlen += (int)write(1, "(null)", (size_t)(data->precision > -1  &&
-				data->precision < 6 ? data->precision : 6));
+		addlen = printspace(data, data->prec > -1 &&
+				data->prec < 6 ? data->prec + 1 : 7);
+		addlen += (int)write(1, "(null)", (size_t)(data->prec > -1 &&
+				data->prec < 6 ? data->prec : 6));
 	}
 	return (addlen);
 }
 
 int			printnullstr(t_data *data, char identifier)
 {
-	int addlen;
+	int		addlen;
 
 	if (identifier == 'c' || identifier == 'C')
 	{
@@ -73,7 +73,7 @@ int			printnullstr(t_data *data, char identifier)
 	return (addlen);
 }
 
-char	*procdouble(char identifier, t_data *data, t_argptrsave *structarg)
+char		*procdouble(char identifier, t_data *data, t_argptrsave *structarg)
 {
 	char	*argstr;
 	char	*outstr;
@@ -84,12 +84,6 @@ char	*procdouble(char identifier, t_data *data, t_argptrsave *structarg)
 		outstr = isneedtoadd(argstr, data, identifier);
 		return (outstr == 0 ? argstr : outstr);
 	}
-//	else if (identifier == 'e' || identifier == 'E')
-//		return (proce(identifier, data, structarg));
-//	else if (identifier == 'g' || identifier == 'G')
-//		return (procg(identifier, data, structarg));
-//	else if (identifier == 'a' || identifier == 'A')
-//		return (proca(identifier, data, structarg));
 	else
 		return (0);
 }

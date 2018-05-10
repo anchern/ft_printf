@@ -6,7 +6,7 @@
 /*   By: achernys <achernys@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/24 17:01:57 by achernys          #+#    #+#             */
-/*   Updated: 2018/04/26 17:21:54 by achernys         ###   ########.fr       */
+/*   Updated: 2018/05/08 16:11:41 by achernys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,13 +46,13 @@ t_data	*getdatastruct(void)
 	newdata->h = 0;
 	newdata->z = 0;
 	newdata->l = 0;
-	newdata->L = 0;
+	newdata->bl = 0;
 	newdata->j = 0;
 	newdata->wstar = 0;
 	newdata->pstar = 0;
 	newdata->dollar = 0;
 	newdata->width = 0;
-	newdata->precision = -1;
+	newdata->prec = -1;
 	return (newdata);
 }
 
@@ -73,7 +73,7 @@ void	procstar(t_data *data, t_argptrsave *sarg)
 	}
 	res = va_arg(data->dollar == 0 ? sarg->argptrcurr : sarg->argstar, int);
 	if (data->pstar)
-		data->precision = res < 0 ? -1 : res;
+		data->prec = res < 0 ? -1 : res;
 	else if (data->wstar)
 	{
 		if (res < 0)

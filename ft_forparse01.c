@@ -26,7 +26,7 @@ char	*isneedtoadd(char *argstr, t_data *data, char identifier)
 }
 
 int		getnum(const char *format, t_argptrsave *structarg,
-				  size_t *addi, t_data *data)
+				size_t *addi, t_data *data)
 {
 	size_t savei;
 

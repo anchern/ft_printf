@@ -12,7 +12,7 @@
 
 #include "ft_printf.h"
 
-static char		*getstrcpy(char *str)
+static char	*getstrcpy(char *str)
 {
 	char *strout;
 
@@ -81,13 +81,13 @@ char		*procs(int identifier, t_data *data, t_argptrsave *structarg)
 		src = getstrcpy(get_str(&structarg->argptrcurr));
 	if (src == 0)
 		return (0);
-	if (data->precision > -1)
+	if (data->prec > -1)
 	{
-		outstr = ft_strnew((size_t)data->precision);
+		outstr = ft_strnew((size_t)data->prec);
 		if (identifier == 'S' || data->l == 1)
-			wprecision(outstr, src, data->precision, wstr);
+			wprecision(outstr, src, data->prec, wstr);
 		else
-			ft_memcpy(outstr, src, (size_t)data->precision);
+			ft_memcpy(outstr, src, (size_t)data->prec);
 		ft_memdel((void **)&src);
 		return (outstr);
 	}

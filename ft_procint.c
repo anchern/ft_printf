@@ -6,17 +6,18 @@
 /*   By: achernys <achernys@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/30 17:37:56 by achernys          #+#    #+#             */
-/*   Updated: 2018/04/24 17:59:50 by achernys         ###   ########.fr       */
+/*   Updated: 2018/05/08 17:07:36 by achernys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <printf.h>
 #include "ft_printf.h"
 
-static void	dataconversion(t_data *data)
+static void	dataconversion(t_data *data, char idenrifier)
 {
 	data->hashtag = 0;
-	if (data->precision > -1 || data->minus == 1)
+	if ((data->prec > -1 && idenrifier != 'f' && idenrifier != 'F') ||
+			data->minus == 1)
 		data->zero = 0;
 	if (data->plus > 0)
 		data->space = 0;
@@ -26,14 +27,14 @@ static char	*getstr(char **formatstr, t_data *data, size_t *len, char *sign)
 {
 	char	*outstr;
 
-	if (data->precision > (int)*len)
-		*len = (size_t)data->precision;
+	if (data->prec > (int)*len)
+		*len = (size_t)data->prec;
 	if ((*sign = *formatstr[0]) == '-')
 	{
 		*formatstr[0] = '0';
-		*len = data->precision >= (int)ft_strlen(*formatstr) ? *len + 1 : *len;
+		*len = data->prec >= (int)ft_strlen(*formatstr) ? *len + 1 : *len;
 	}
-	else if (data->plus || data->space )
+	else if (data->plus || data->space)
 	{
 		*sign = (char)(data->plus ? '+' : ' ');
 		*len += 1;
@@ -43,17 +44,17 @@ static char	*getstr(char **formatstr, t_data *data, size_t *len, char *sign)
 	return (outstr);
 }
 
-static char	*numnotationint(char *formatstr, t_data *data, int identifier)
+char		*numnotationint(char *formatstr, t_data *data, char identifier)
 {
 	char	*outstr;
 	size_t	len;
 	char	sign;
 	int		i;
 
-	dataconversion(data);
+	dataconversion(data, identifier);
 	len = ft_strlen(formatstr);
-	if (data->precision < (int)len && !data->plus && !data->space)
-			return ((char *) -1);
+	if (data->prec < (int)len && !data->plus && !data->space)
+		return ((char *)-1);
 	outstr = getstr(&formatstr, data, &len, &sign);
 	i = (int)ft_strlen(formatstr) - 1;
 	while (i >= 0)
@@ -63,15 +64,16 @@ static char	*numnotationint(char *formatstr, t_data *data, int identifier)
 		i--;
 	}
 	if ((sign == '-' || sign == '+' || sign == ' ') &&
-			identifier !='u' && identifier != 'U')
+			identifier != 'u' && identifier != 'U')
 		outstr[0] = sign;
+	ft_memdel((void **)&formatstr);
 	return (outstr);
 }
 
 static char	*get_value(t_data *data, t_argptrsave *structarg,
-								 char identifier)
+						char identifier)
 {
-	if (data->L == 2)
+	if (data->bl == 2)
 		return (ft_bitoa(va_arg(structarg->argptrcurr, __int128)));
 	else if (data->l == 2)
 		return (ft_bitoa(get_long(&structarg->argptrcurr)));
@@ -98,14 +100,11 @@ char		*procint(t_data *data, t_argptrsave *structarg, char identifier)
 		resstr = ft_bitoa(get_uvalue(data, structarg, identifier));
 	else
 		resstr = get_value(data, structarg, identifier);
-	if (*resstr == '0' && data->precision == 0)
+	if (*resstr == '0' && data->prec == 0)
 		*resstr = 0;
 	if ((outstr = identifier == 'u' || identifier == 'U' ?
-  					numnotationnot(resstr, data, identifier) :
-				  numnotationint(resstr, data, identifier)) != (char *)-1)
-	{
-		ft_memdel((void **) &resstr);
+				numnotationnot(resstr, data, identifier) :
+				numnotationint(resstr, data, identifier)) != (char *)-1)
 		return (outstr);
-	} else
-		return (resstr);
+	return (resstr);
 }

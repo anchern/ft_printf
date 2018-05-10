@@ -6,16 +6,17 @@
 /*   By: achernys <achernys@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/20 21:06:34 by achernys          #+#    #+#             */
-/*   Updated: 2018/04/24 16:50:29 by achernys         ###   ########.fr       */
+/*   Updated: 2018/05/03 19:52:05 by achernys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static char *procswc(wchar_t c)
+static char	*procswc(wchar_t c)
 {
 	char	*outstr;
 
+	outstr = 0;
 	if (c < 128)
 	{
 		outstr = ft_strnew(1);
@@ -30,10 +31,11 @@ static char *procswc(wchar_t c)
 	return (outstr);
 }
 
-static char *procbwc(wchar_t c)
+static char	*procbwc(wchar_t c)
 {
 	char	*outstr;
 
+	outstr = 0;
 	if (c > 2047 && c < 65536)
 	{
 		outstr = ft_strnew(3);
@@ -51,7 +53,6 @@ static char *procbwc(wchar_t c)
 	}
 	return (outstr);
 }
-
 
 char		*procwc(wchar_t c)
 {
@@ -97,22 +98,20 @@ char		*procwstr(wchar_t *wstr)
 	int		len;
 	int		i;
 	int		j;
-	int		h;
 
 	if (wstr == 0)
 		return (0);
 	i = 0;
-	h = 0;
 	len = ft_wstrlen(wstr);
 	outstr = ft_strnew((size_t)len);
 	while (wstr[i] != 0)
 	{
 		tmp = procwc(wstr[i]);
 		j = 0;
+		len = (int)ft_strlen(outstr);
 		while (tmp[j] != 0)
 		{
-			outstr[h] = tmp[j];
-			h++;
+			outstr[len + j] = tmp[j];
 			j++;
 		}
 		ft_memdel((void **)&tmp);

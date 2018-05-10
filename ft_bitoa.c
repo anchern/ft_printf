@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_bitoa.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: achernys <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: achernys <achernys@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/10 17:49:43 by achernys          #+#    #+#             */
-/*   Updated: 2018/03/30 18:47:54 by achernys         ###   ########.fr       */
+/*   Updated: 2018/05/03 19:54:20 by achernys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ static void	res(char *str, __int128 n)
 
 char		*ft_bitoa(__int128 n)
 {
-	size_t	size;
-	__int128		tmp;
-	char	*str;
+	size_t		size;
+	__int128	tmp;
+	char		*str;
 
 	size = 1;
 	tmp = n;

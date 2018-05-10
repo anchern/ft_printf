@@ -6,7 +6,7 @@
 /*   By: achernys <achernys@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/29 18:55:08 by achernys          #+#    #+#             */
-/*   Updated: 2018/04/26 17:23:38 by achernys         ###   ########.fr       */
+/*   Updated: 2018/05/09 18:57:24 by achernys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ static void	fixnumnotaticon(char **formatstr, char *str, t_data *data,
 	else if (((identifier == 'x' || identifier == 'X') && data->hashtag) ||
 			identifier == 'p')
 	{
+		if (ft_strlen(str) == 1 && str[0] == '0')
+			return ;
 		if (data->zero == 1 && data->minus == 0)
 		{
 			ft_strchr(*formatstr, str[1])[0] = '0';
@@ -59,8 +61,6 @@ char		*addspace(char *src, t_data *data, char identifier)
 		fixnumnotaticon(&strout, src, data, identifier);
 	return (strout);
 }
-
-
 
 char		*getargstr(char identifier, t_data *data, t_argptrsave *structarg)
 {
