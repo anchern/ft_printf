@@ -68,7 +68,7 @@ char			*procf(char identifier, t_data *data, t_argptrsave *structarg)
 		return (ft_strdup(identifier == 'F' ? "INF" : "inf"));
 	if ((outstr = procbigf(data, num, identifier)))
 		return (outstr);
-	res = ft_ftoa(num, data->prec);
+	res = ft_ftoa(num, data->prec, data->hashtag);
 	if ((outstr = numnotationint(res, data, identifier)) != (char *)-1)
 		return (outstr);
 	return (res);

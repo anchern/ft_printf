@@ -6,7 +6,7 @@
 /*   By: achernys <achernys@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/28 18:12:38 by achernys          #+#    #+#             */
-/*   Updated: 2018/05/10 13:34:06 by achernys         ###   ########.fr       */
+/*   Updated: 2018/05/10 13:55:59 by achernys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ typedef struct		s_data
 
 char				*ft_bitoa(__int128 n);
 char				*ft_itoabase(__uint128_t number, int base, char sym);
-char				*ft_ftoa(long double num, int precision);
+char				*ft_ftoa(long double num, int precision, int dot);
 
 int					ft_printf(const char *format, ...);
 

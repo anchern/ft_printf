@@ -6,7 +6,7 @@
 /*   By: achernys <achernys@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/10 13:31:49 by achernys          #+#    #+#             */
-/*   Updated: 2018/05/10 15:06:43 by achernys         ###   ########.fr       */
+/*   Updated: 2018/05/10 20:27:11 by achernys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,25 @@ static char	*addepart(char *num, int minus, int power, char identifier)
 
 static void	takeeformatnum(long double *num, int *power)
 {
-	while (fabsl(*num) > 9.9 || fabsl(*num) < 1.0)
+	int			flag;
+	int			intpart;
+	long double	tmpnum;
+
+	flag = fabsl(*num) < 1.0 ? 0 : 1;
+	while ((fabsl(*num) >= 9.999999999999 || fabsl(*num) < 1.0) && *num != 0.0)
 	{
-		*num = fabsl(*num) > 9.9 ? *num / 10.0 : *num * 10.0;
+		*num = flag ? *num / 10.0 : *num * 10.0;
 		*power += 1;
+	}
+	tmpnum = *num;
+	intpart = (int)*num;
+	tmpnum -= (long double)intpart;
+	if (tmpnum >= 0.5)
+		intpart++;
+	if (intpart == 10)
+	{
+		*num /= 10;
+		*power += flag == 1 ? 1 : -1;
 	}
 }
 
@@ -59,10 +74,10 @@ char		*transformftoue(char identifier, t_data *data,
 		return (ft_strdup(identifier == 'F' ? "INF" : "inf"));
 	power = 0;
 	minus = 0;
-	if (fabsl(num) < 1.0)
+	if (fabsl(num) < 1.0 && num != 0.0)
 		minus = 1;
 	takeeformatnum(&num, &power);
-	res = ft_ftoa(num, data->prec);
+	res = ft_ftoa(num, data->prec, data->hashtag);
 	res = addepart(res, minus, power, identifier);
 	if ((outstr = numnotationint(res, data, identifier)) != (char *)-1)
 		return (outstr);
