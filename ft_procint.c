@@ -16,8 +16,8 @@
 static void	dataconversion(t_data *data, char idenrifier)
 {
 	data->hashtag = 0;
-	if ((data->prec > -1 && idenrifier != 'f' && idenrifier != 'F') ||
-			data->minus == 1)
+	if ((data->prec > -1 && idenrifier != 'f' && idenrifier != 'F' &&
+			idenrifier != 'e' && idenrifier != 'E') || data->minus == 1)
 		data->zero = 0;
 	if (data->plus > 0)
 		data->space = 0;

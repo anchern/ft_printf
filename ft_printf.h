@@ -6,7 +6,7 @@
 /*   By: achernys <achernys@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/28 18:12:38 by achernys          #+#    #+#             */
-/*   Updated: 2018/05/10 12:53:28 by achernys         ###   ########.fr       */
+/*   Updated: 2018/05/10 13:34:06 by achernys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,8 @@ char				*procdouble(char identifier, t_data *data,
 								t_argptrsave *structarg);
 char				*procf(char identifier, t_data *data,
 							t_argptrsave *structarg);
+char				*transformftoue(char identifier, t_data *data,
+									t_argptrsave *structarg);
 
 char				*proctext(char identifier, t_data *data,
 								t_argptrsave *structarg);

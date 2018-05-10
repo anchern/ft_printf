@@ -6,7 +6,7 @@
 /*   By: achernys <achernys@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/26 16:13:57 by achernys          #+#    #+#             */
-/*   Updated: 2018/05/08 17:07:36 by achernys         ###   ########.fr       */
+/*   Updated: 2018/05/10 13:31:45 by achernys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,13 @@ char		*procdouble(char identifier, t_data *data, t_argptrsave *structarg)
 	if (identifier == 'f' || identifier == 'F')
 	{
 		argstr = procf(identifier, data, structarg);
+		outstr = isneedtoadd(argstr, data, identifier);
+		return (outstr == 0 ? argstr : outstr);
+	}
+	else if (identifier == 'e' ||
+			identifier == 'E')
+	{
+		argstr = transformftoue(identifier, data, structarg);
 		outstr = isneedtoadd(argstr, data, identifier);
 		return (outstr == 0 ? argstr : outstr);
 	}
