@@ -6,7 +6,7 @@
 /*   By: achernys <achernys@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/08 17:56:25 by achernys          #+#    #+#             */
-/*   Updated: 2018/05/08 18:23:25 by achernys         ###   ########.fr       */
+/*   Updated: 2018/05/10 16:44:12 by achernys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,19 @@ static __int128		getfract(int precision, long double num)
 	return ((__int128)tmpint);
 }
 
+static int			cpy(long double num)
+{
+	int		len;
+
+	len = 0;
+	while (num < 1.0 && num > 0)
+	{
+		num *= 10;
+		len++;
+	}
+	return (len);
+}
+
 static char			*get_fractpart(int precision, long double num, int *flag)
 {
 	__int128_t		intpart;
@@ -57,7 +70,7 @@ static char			*get_fractpart(int precision, long double num, int *flag)
 			ft_memdel((void **)&tmp);
 			return (outs);
 		}
-		ft_memcpy((void *)(&outs[1]), (void *)tmp, ft_strlen(tmp));
+		ft_memcpy((void *)(&outs[cpy(fractpart)]), (void *)tmp, ft_strlen(tmp));
 		ft_memdel((void **)&tmp);
 	}
 	return (outs);
@@ -76,7 +89,7 @@ char				*ft_ftoa(long double num, int precision)
 	num -= (long double)tmpint;
 	if (precision == 0 && num >= 0.5)
 		tmpint++;
-	fractpart = get_fractpart(precision, ABS(num), &flag);
+	fractpart = get_fractpart(precision, fabsl(num), &flag);
 	if (flag == 1)
 		tmpint++;
 	intpart = ft_bitoa(tmpint);

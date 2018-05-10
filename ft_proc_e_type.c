@@ -6,7 +6,7 @@
 /*   By: achernys <achernys@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/10 13:31:49 by achernys          #+#    #+#             */
-/*   Updated: 2018/05/10 14:49:11 by achernys         ###   ########.fr       */
+/*   Updated: 2018/05/10 15:06:43 by achernys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ static char	*addepart(char *num, int minus, int power, char identifier)
 
 static void	takeeformatnum(long double *num, int *power)
 {
-	while (*num > 9.9 || *num < 1.0)
+	while (fabsl(*num) > 9.9 || fabsl(*num) < 1.0)
 	{
-		*num = *num > 9.9 ? *num / 10.0 : *num * 10.0;
+		*num = fabsl(*num) > 9.9 ? *num / 10.0 : *num * 10.0;
 		*power += 1;
 	}
 }
@@ -59,7 +59,7 @@ char		*transformftoue(char identifier, t_data *data,
 		return (ft_strdup(identifier == 'F' ? "INF" : "inf"));
 	power = 0;
 	minus = 0;
-	if (num < 1.0)
+	if (fabsl(num) < 1.0)
 		minus = 1;
 	takeeformatnum(&num, &power);
 	res = ft_ftoa(num, data->prec);
